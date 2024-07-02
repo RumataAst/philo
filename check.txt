@@ -1,0 +1,14 @@
+Checking with
+Data races and deadlock checks
+1) compile with flag -fsanitize=thread and run
+or
+2) remove the flag from above and run
+valgrind --tool=helgrind --fair-sched=yes
+./philo 5 50000 200 200 10
+valgrind --tool=helgrind --fair-sched=yes
+--history-level=approx ./philo 5 50000 200 200 10
+valgrind --tool=helgrind --fair-sched=yes
+--history-level=none ./philo 5 50000 200 200 10
+or
+3) run
+valgrind --tool=drd --fair-sched=yes ./philo 5 50000 200 200 10

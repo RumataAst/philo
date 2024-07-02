@@ -5,45 +5,32 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akretov <akretov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/20 16:03:53 by akretov           #+#    #+#             */
-/*   Updated: 2024/06/29 20:29:28 by akretov          ###   ########.fr       */
+/*   Created: 2024/07/01 18:48:30 by akretov           #+#    #+#             */
+/*   Updated: 2024/07/02 12:02:52 by akretov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-// DELETE
-void	ft_print_philo(t_arg *philo_arg)
+void	ft_print_philo(t_table *table)
 {
 	printf("Philo count is %i\nTime to die %zu\nTime to sleep %zu\nTime to Eat %zu\nPhilo_diet %i",
-		philo_arg->philo_count, philo_arg->time_d, philo_arg->time_s, philo_arg->time_e, philo_arg->philo_diet);
+		table->philo_count, table->time_d, table->time_s, table->time_e, table->philo_diet);
 	printf("\n");
 	printf("forks : ");
-	for (int i = 0; i < philo_arg->philo_count; i++)
+	for (int i = 0; i < table->philo_count; i++)
 	{
-		printf("%i ", philo_arg->forks[i]);
-	}
-	printf("\n");
-	printf("status : ");
-	for (int i = 0; i < philo_arg->philo_count; i++)
-	{
-		printf("%i ", philo_arg->philo_stat[i]);
+		printf("%i ", table->forks[i]);
 	}
 	printf("\n");
 	printf("Max meals : ");
-	for (int i = 0; i < philo_arg->philo_count; i++)
+	for (int i = 0; i < table->philo_count; i++)
 	{
-		printf("%i ", philo_arg->philo_meal[i]);
-	}
-	printf("\n");
-	printf("Time left : ");
-	for (int i = 0; i < philo_arg->philo_count; i++)
-	{
-		printf("%zu ", philo_arg->time_l[i]);
+		printf("%i ", table->phil[i]->meals_eaten);
 	}
 }
 
-int	ft_philo_run(int ac, char **av, t_arg *philo_arg)
+int	ft_philo_run(int ac, char *av[], t_table *table)
 {
 	if (ft_check_arg(ac, av) != 0)
 	{
@@ -55,28 +42,28 @@ int	ft_philo_run(int ac, char **av, t_arg *philo_arg)
 		write(1, "Number should be int\n", 22);
 		return (ft_check_int(ac, av));
 	}
-	philo_arg = (t_arg *)malloc(sizeof(t_arg));
-	if (!philo_arg)
+	table = (t_table *)malloc(sizeof(t_table));
+	if (!table)
 	{
 		write(1, "Memory allocation failed\n", 26);
 		return (2);
 	}
-	ft_struct_fill(ac, av, philo_arg);
-	ft_start_thread(philo_arg);
-	ft_print_philo(philo_arg);
-	ft_free_struct(philo_arg);
+	ft_struct_fill(ac, av, table);
+	ft_start_thread(table);
+	ft_print_philo(table);
+	ft_free_struct(table);
 	return (0);
 }
 
-int	main(int ac, char **av)
+int	main(int ac, char *av[])
 {
-	t_arg	*philo_arg;
+	t_table	*table;
 	int		i;
 
-	philo_arg = NULL;
+	table = NULL;
 	if (ac == 5 || ac == 6)
 	{
-		i = ft_philo_run(ac, av, philo_arg);
+		i = ft_philo_run(ac, av, table);
 		if (i != 0)
 			return (i);
 	}
