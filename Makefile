@@ -6,7 +6,7 @@
 #    By: akretov <akretov@student.42prague.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 19:21:32 by akretov           #+#    #+#              #
-#    Updated: 2024/07/02 12:27:42 by akretov          ###   ########.fr        #
+#    Updated: 2024/07/05 16:06:59 by akretov          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,9 @@ CFILES =	srcs/check_arg.c		\
 			srcs/struct_init_1.c	\
 			srcs/utils_0.c			\
 			srcs/utils_1.c			\
+			srcs/threads_0.c		\
+			srcs/threads_1.c		\
+			srcs/threads_2.cc		\
 			srcs/philo.c
 
 OFILES = $(CFILES:.c=.o)

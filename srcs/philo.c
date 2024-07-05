@@ -6,7 +6,7 @@
 /*   By: akretov <akretov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 18:48:30 by akretov           #+#    #+#             */
-/*   Updated: 2024/07/02 12:02:52 by akretov          ###   ########.fr       */
+/*   Updated: 2024/07/05 17:56:44 by akretov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ void	ft_print_philo(t_table *table)
 		table->philo_count, table->time_d, table->time_s, table->time_e, table->philo_diet);
 	printf("\n");
 	printf("forks : ");
-	for (int i = 0; i < table->philo_count; i++)
+	for (unsigned int i = 0; i < table->philo_count; i++)
 	{
 		printf("%i ", table->forks[i]);
 	}
 	printf("\n");
-	printf("Max meals : ");
-	for (int i = 0; i < table->philo_count; i++)
-	{
-		printf("%i ", table->phil[i]->meals_eaten);
-	}
+	// printf("Max meals : ");
+	// for (unsigned int i = 0; i < table->philo_count; i++)
+	// {
+	// 	printf("%i ", table->phil[i]->meals_eaten);
+	// }
 }
 
 int	ft_philo_run(int ac, char *av[], t_table *table)
@@ -51,7 +51,7 @@ int	ft_philo_run(int ac, char *av[], t_table *table)
 	ft_struct_fill(ac, av, table);
 	ft_start_thread(table);
 	ft_print_philo(table);
-	ft_free_struct(table);
+	// ft_free_struct(table);
 	return (0);
 }
 
