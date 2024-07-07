@@ -6,7 +6,7 @@
 /*   By: akretov <akretov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 16:44:42 by akretov           #+#    #+#             */
-/*   Updated: 2024/07/05 18:01:59 by akretov          ###   ########.fr       */
+/*   Updated: 2024/07/07 18:34:22 by akretov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@
 # include <limits.h>
 # include <pthread.h>
 # include <sys/time.h>
+
+# define THINK "is thinking"
+# define FORK "has taken a fork"
+# define EAT "is eating"
+# define SLEEP "is sleeping"
+# define DEAD "died"
 
 typedef struct s_philo_th
 {
@@ -37,6 +43,7 @@ typedef struct s_table
 	t_phil			**phil;
 	pthread_mutex_t	*forks_lock; //lock for forks [0,0,0,0,0,..,n]
 	pthread_mutex_t	main_lock; // lock for writing to terminal
+	pthread_mutex_t	death_lock;
 	size_t			time_d;
 	size_t			time_s;
 	size_t			time_e;
@@ -74,7 +81,18 @@ void		ft_start_thread(t_table *table);
 void		ft_no_diet(t_table	*table);
 
 //threads_2.c
-void		ft_checker(t_table	*table);
-void		*ft_phread(void *arg);
+void		*ft_checker(void *arg);
+
+//threads_3.c
+void		*ft_pthread(void *arg);
+
+//threads_utils.c
+void		ft_status_write(t_phil *phil_th, t_table *table, char *arg);
+int			ft_check_death(t_table *table);
+void		ft_mutex_init(t_table *table);
+void		ft_mutex_destroy(t_table *table);
+
+//DELETE TEST.c
+void	ft_print_philo(t_table *table);
 
 #endif

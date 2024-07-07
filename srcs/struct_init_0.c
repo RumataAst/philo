@@ -6,7 +6,7 @@
 /*   By: akretov <akretov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 20:05:04 by akretov           #+#    #+#             */
-/*   Updated: 2024/07/05 18:02:10 by akretov          ###   ########.fr       */
+/*   Updated: 2024/07/07 18:03:50 by akretov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,13 @@ void	ft_free_if_error(int i, t_table *table)
 		free(table->phil[j]);
 		j++;
 	}
-	free(table->forks);
-	free(table->phil);
-	free(table);
+	if (table->forks)
+		free(table->forks);
+	if (table->forks)
+		free(table->phil);
+	if (table->forks)
+		free(table);
+	if (table->forks)
 	exit(4);
 }
 
@@ -35,6 +39,7 @@ static void	ft_struct_init(int i, t_phil *phil, t_table *main_table)
 	phil->time_start = 0;
 	phil->meals_eaten = 0;
 	phil->id = i;
+
 }
 
 static void	ft_philo_th_create(t_table *table)
@@ -88,6 +93,10 @@ void	ft_struct_fill(int ac, char **av, t_table *table)
 		free(table);
 		exit(2);
 	}
+	table->forks_lock = malloc(table->philo_count * sizeof(pthread_mutex_t));
+	if (!table->forks_lock)
+		ft_free_if_error(0, table);
+
 	ft_init_forks(table);
 	ft_philo_th_create(table);
 	ft_init_meals(table);

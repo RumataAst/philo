@@ -6,7 +6,7 @@
 /*   By: akretov <akretov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 12:30:08 by akretov           #+#    #+#             */
-/*   Updated: 2024/07/05 16:01:17 by akretov          ###   ########.fr       */
+/*   Updated: 2024/07/07 18:44:02 by akretov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ static void	*ft_death(void *arg)
 static void	ft_dead_alone(t_table *table)
 {
 	pthread_t	dead;
-
+	printf("WTF");
 	if (pthread_create(&dead, NULL, ft_death, table) != 0)
 		write(1, "Failed to create thread\n", 25);
 	if (pthread_join(dead, NULL) != 0)
 		write(1, "Failed to join thread\n", 23);
-	ft_free_ft_no_dietstruct(table);
+	ft_free_struct(table);
 }
 
 void	ft_start_thread(t_table *table)
