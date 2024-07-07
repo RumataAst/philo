@@ -6,7 +6,7 @@
 /*   By: akretov <akretov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 16:06:39 by akretov           #+#    #+#             */
-/*   Updated: 2024/07/07 18:49:33 by akretov          ###   ########.fr       */
+/*   Updated: 2024/07/07 19:08:57 by akretov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,11 @@ void	*ft_checker(void *arg)
 	time_start = ft_get_current_time();
 	time_next_m = 0;
 	i = 0;
-	// condition to start only once all threads were created
-	// while (
-	ft_usleep(10000);
-	printf("Checker %zu\n", ft_get_current_time());
 	while (1)
 	{
+		if (table->start == 1)
+		{
+		ft_usleep(table->time_d);
 		i = 0;
 		while (i < table->philo_count)
 		{
@@ -53,7 +52,8 @@ void	*ft_checker(void *arg)
 			i++;
 		}
 		ft_usleep(500);
+		}
+		ft_usleep(100);
 	}
 	return (NULL);
-	// )
 }

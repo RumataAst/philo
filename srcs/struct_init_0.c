@@ -6,7 +6,7 @@
 /*   By: akretov <akretov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 20:05:04 by akretov           #+#    #+#             */
-/*   Updated: 2024/07/07 18:03:50 by akretov          ###   ########.fr       */
+/*   Updated: 2024/07/07 18:57:43 by akretov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void	ft_struct_fill(int ac, char **av, t_table *table)
 		free(table);
 		exit(2);
 	}
+	table->start = 0;
 	table->forks_lock = malloc(table->philo_count * sizeof(pthread_mutex_t));
 	if (!table->forks_lock)
 		ft_free_if_error(0, table);

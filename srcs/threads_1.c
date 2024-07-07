@@ -6,7 +6,7 @@
 /*   By: akretov <akretov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 12:59:33 by akretov           #+#    #+#             */
-/*   Updated: 2024/07/07 18:45:25 by akretov          ###   ########.fr       */
+/*   Updated: 2024/07/07 19:08:14 by akretov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@ void	ft_no_diet(t_table *table)
 		}
 		i++;
 	}
+	pthread_mutex_lock(&table->main_lock);
+	table->start = 1;
+	pthread_mutex_unlock(&table->main_lock);
+	
 	if (pthread_join(waiter, NULL) != 0 )
 	{
 		printf("Failed to join checker thread\n");

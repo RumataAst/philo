@@ -6,7 +6,7 @@
 /*   By: akretov <akretov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 16:44:42 by akretov           #+#    #+#             */
-/*   Updated: 2024/07/07 18:34:22 by akretov          ###   ########.fr       */
+/*   Updated: 2024/07/07 18:57:26 by akretov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_table
 	int				*forks;
 	int				*meals;
 	int				death;
+	int				start;
 	unsigned int	philo_count;
 	unsigned int	philo_diet;
 }	t_table;

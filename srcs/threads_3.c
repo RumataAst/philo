@@ -6,7 +6,7 @@
 /*   By: akretov <akretov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 17:25:24 by akretov           #+#    #+#             */
-/*   Updated: 2024/07/07 18:43:36 by akretov          ###   ########.fr       */
+/*   Updated: 2024/07/07 19:09:26 by akretov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void ft_put_forks(t_table *table, int fork_l,int fork_r)
 	pthread_mutex_unlock(&table->forks_lock[fork_r]);
 	pthread_mutex_lock(&table->phil[fork_l]->time_lock);
 	table->phil[fork_l]->time_next_meal += table->time_d;
-	pthread_mutex_lock(&table->phil[fork_l]->time_lock);
+	pthread_mutex_unlock(&table->phil[fork_l]->time_lock);
 }
 
 static void	ft_pick_eat(t_phil *phil_th, t_table *table)
@@ -83,11 +83,13 @@ void	*ft_pthread(void *arg)
 	phil_th->time_start = ft_get_current_time();
 	dif = 0;
 
-	printf("%zu\n", ft_get_current_time());
-	if (phil_th->id % 2)
-		ft_usleep(100);
+	// if (phil_th->id % 2)
+	// 	ft_usleep(100);
 	while (1)
 	{
+		if (table->start == 1)
+		{
+			printf("WTF\n");
 		ft_status_write(phil_th, table, THINK);
 		ft_pick_eat(phil_th, table);
 		ft_sleep(phil_th, table);
@@ -98,6 +100,8 @@ void	*ft_pthread(void *arg)
 			break;
 		}
 		pthread_mutex_unlock(&table->death_lock);
+		ft_usleep(100);
+		}
 		ft_usleep(100);
 	}
 	return (NULL);
