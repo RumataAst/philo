@@ -6,24 +6,20 @@
 #    By: akretov <akretov@student.42prague.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 19:21:32 by akretov           #+#    #+#              #
-#    Updated: 2024/07/07 18:06:46 by akretov          ###   ########.fr        #
+#    Updated: 2024/07/08 18:19:02 by akretov          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 FLAGS = -Wall -Wextra -Werror -g -pthread
 
-CFILES =	srcs/check_arg.c		\
-			srcs/struct_init_0.c	\
-			srcs/struct_init_1.c	\
-			srcs/utils_0.c			\
-			srcs/utils_1.c			\
-			srcs/threads_utils.c	\
-			srcs/threads_0.c		\
-			srcs/threads_1.c		\
-			srcs/threads_2.c		\
-			srcs/threads_3.c		\
-			srcs/test.c 			\
+CFILES =	srcs/utils.c		\
+			srcs/check_arg.c	\
+			srcs/struct_init.c	\
+			srcs/free.c			\
+			srcs/TESTING.c		\
+			srcs/one_pthread.c	\
+			srcs/thread.c		\
 			srcs/philo.c
 
 OFILES = $(CFILES:.c=.o)

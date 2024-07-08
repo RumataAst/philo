@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   threads_0.c                                        :+:      :+:    :+:   */
+/*   one_pthread.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akretov <akretov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/02 12:30:08 by akretov           #+#    #+#             */
-/*   Updated: 2024/07/07 18:44:02 by akretov          ###   ########.fr       */
+/*   Created: 2024/07/08 18:18:11 by akretov           #+#    #+#             */
+/*   Updated: 2024/07/08 18:28:45 by akretov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,12 @@ static void	*ft_death(void *arg)
 	return (NULL);
 }
 
-static void	ft_dead_alone(t_table *table)
+void	ft_dead_alone(t_table *table)
 {
 	pthread_t	dead;
-	printf("WTF");
+
 	if (pthread_create(&dead, NULL, ft_death, table) != 0)
 		write(1, "Failed to create thread\n", 25);
 	if (pthread_join(dead, NULL) != 0)
 		write(1, "Failed to join thread\n", 23);
-	ft_free_struct(table);
-}
-
-void	ft_start_thread(t_table *table)
-{
-	if (table->philo_count == 1)
-		ft_dead_alone(table);
-	else if (table->philo_diet == 0)
-		ft_no_diet(table);
-	// else
-	// {
-
-	// }
 }

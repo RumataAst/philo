@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_0.c                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akretov <akretov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/20 18:27:28 by akretov           #+#    #+#             */
-/*   Updated: 2024/06/30 16:46:59 by akretov          ###   ########.fr       */
+/*   Created: 2024/07/08 15:43:50 by akretov           #+#    #+#             */
+/*   Updated: 2024/07/08 17:53:34 by akretov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-size_t	ft_get_current_time(void)
+long	ft_get_current_time(void)
 {
 	struct timeval	time;
 
@@ -21,9 +21,9 @@ size_t	ft_get_current_time(void)
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
-int	ft_usleep(size_t milliseconds)
+int	ft_usleep(long milliseconds)
 {
-	size_t	start;
+	long	start;
 
 	start = ft_get_current_time();
 	while ((ft_get_current_time() - start) < milliseconds)

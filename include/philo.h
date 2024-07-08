@@ -6,7 +6,7 @@
 /*   By: akretov <akretov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 16:44:42 by akretov           #+#    #+#             */
-/*   Updated: 2024/07/07 18:57:26 by akretov          ###   ########.fr       */
+/*   Updated: 2024/07/08 18:41:47 by akretov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,79 +21,53 @@
 # include <pthread.h>
 # include <sys/time.h>
 
-# define THINK "is thinking"
-# define FORK "has taken a fork"
-# define EAT "is eating"
-# define SLEEP "is sleeping"
-# define DEAD "died"
-
 typedef struct s_philo_th
 {
-	struct s_table	*table;
-	pthread_t		thread;
-	pthread_mutex_t	time_lock; // lock for changing and reading time_next_meal
-	size_t			time_next_meal;
-	size_t			time_start;
-	unsigned int	meals_eaten;
-	unsigned int	id;
+	struct s_table	*table;			//main struct
+	pthread_t		thread;			//thread
+	pthread_mutex_t	time_lock; 		//lock for time_next_meal
+	long long		time_next_meal;	//when to eat
+	int				meals_eaten;	//how many meals
+	int				id;				//which philo
 }	t_phil;
 
 typedef struct s_table
 {
-	t_phil			**phil;
-	pthread_mutex_t	*forks_lock; //lock for forks [0,0,0,0,0,..,n]
-	pthread_mutex_t	main_lock; // lock for writing to terminal
-	pthread_mutex_t	death_lock;
-	size_t			time_d;
-	size_t			time_s;
-	size_t			time_e;
-	int				*forks;
-	int				*meals;
-	int				death;
-	int				start;
-	unsigned int	philo_count;
-	unsigned int	philo_diet;
+	t_phil			**phil;		//create n structs
+	pthread_mutex_t	*fork_lock;//lock for forks [0,0,0,0,0,..,n]
+	pthread_mutex_t	main_lock; 	//lock for writing to terminal
+	pthread_mutex_t	end_lock; 	//lock to check if somebody died
+	long long		time_start;	//time when every thread is created
+	int				time_d;		//time to die
+	int				time_s;		//time to sleep
+	int				time_e;		//time to eat
+	int				end;		//flag for death
+	int				philo_n;	//how many philo
+	int				philo_diet;	//how many meals they need to eat
 }	t_table;
 
 //check_arg.c
-int			ft_check_int(int ac, char **av);
-int			ft_check_arg(int ac, char **av);
+void		ft_check_pars(int ac, char *av[]);
 
-//struct_init_0.c
-void		ft_free_if_error(int i, t_table *table);
-void		ft_struct_fill(int ac, char **av, t_table *table);
-
-//struct_init_1.c
-void		ft_init_meals(t_table *table);
-
-//utils_0.c
-size_t		ft_get_current_time(void);
-int			ft_usleep(size_t milliseconds);
+//utils.c Time + atol
+long		ft_get_current_time(void);
+int			ft_usleep(long milliseconds);
 int			ft_isdigit(int c);
 long long	ft_atol(const char *str);
 
-//utils_1.c
-void		ft_free_struct(t_table *table);
+//struct_init.c
+void		ft_struct_init(int ac, char *av[], t_table *table);
 
-//threads_0.c
-void		ft_start_thread(t_table *table);
+//free.c
+int			fr_free_all(t_table *table,int ex_num);
 
-//threads_1.c
-void		ft_no_diet(t_table	*table);
+//one_pthread.c
+void		ft_dead_alone(t_table *table);
 
-//threads_2.c
-void		*ft_checker(void *arg);
+//thread.c
+void		ft_run_thread(t_table *table);
 
-//threads_3.c
-void		*ft_pthread(void *arg);
-
-//threads_utils.c
-void		ft_status_write(t_phil *phil_th, t_table *table, char *arg);
-int			ft_check_death(t_table *table);
-void		ft_mutex_init(t_table *table);
-void		ft_mutex_destroy(t_table *table);
-
-//DELETE TEST.c
-void	ft_print_philo(t_table *table);
+//TESTING.C FOR TESTING
+void	print_all(t_table *table);
 
 #endif

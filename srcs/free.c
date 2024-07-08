@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct_init_1.c                                    :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akretov <akretov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/02 12:16:17 by akretov           #+#    #+#             */
-/*   Updated: 2024/07/05 16:30:25 by akretov          ###   ########.fr       */
+/*   Created: 2024/07/08 18:07:22 by akretov           #+#    #+#             */
+/*   Updated: 2024/07/08 18:42:46 by akretov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-void	ft_init_meals(t_table *table)
+int	fr_free_all(t_table *table, int ex_num)
 {
-	unsigned int	i;
+	int	i;
 
 	i = 0;
-	table->meals = (int *)malloc(sizeof(int) * table->philo_count);
-	if (!table->meals)
+	if (table->phil)
 	{
-		ft_free_if_error(table->philo_count, table);
-		exit(5);
+		while (i < table->philo_n)
+			free(table->phil[i++]);
+		free(table->phil);
 	}
-	while (i < table->philo_count)
-	{
-		table->meals[i] = table->philo_diet;
-		i++;
-	}
+	if (table->fork_lock)
+		free(table->fork_lock);
+	if (table)
+		free(table);
+	if (ex_num != 0)
+		exit(ex_num);
+	return (0);
 }
