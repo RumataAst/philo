@@ -6,7 +6,7 @@
 /*   By: akretov <akretov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 16:44:42 by akretov           #+#    #+#             */
-/*   Updated: 2024/07/08 18:41:47 by akretov          ###   ########.fr       */
+/*   Updated: 2024/07/08 18:56:01 by akretov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,11 @@ int			fr_free_all(t_table *table,int ex_num);
 
 //one_pthread.c
 void		ft_dead_alone(t_table *table);
+
+//checker_thread.c
+void		ft_checker(t_table *table);
+
+//philo_thread.c
 
 //thread.c
 void		ft_run_thread(t_table *table);

@@ -6,7 +6,7 @@
 /*   By: akretov <akretov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 18:13:58 by akretov           #+#    #+#             */
-/*   Updated: 2024/07/08 18:47:34 by akretov          ###   ########.fr       */
+/*   Updated: 2024/07/08 18:55:43 by akretov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,10 @@ void	ft_run_thread(t_table *table)
 {
 	if (table->philo_n == 1)
 		ft_dead_alone(table);
-	else if (table->philo_diet == 0)
+	ft_mutex_init(table);
+	if (table->philo_diet == 0)
 	{
-		ft_mutex_init(table);
-		ft_mutex_destroy(table);
+		ft_checker(table);
 	}
+	ft_mutex_destroy(table);
 }
