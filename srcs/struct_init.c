@@ -6,7 +6,7 @@
 /*   By: akretov <akretov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:05:48 by akretov           #+#    #+#             */
-/*   Updated: 2024/07/08 18:42:30 by akretov          ###   ########.fr       */
+/*   Updated: 2024/07/13 14:34:54 by akretov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ void	ft_struct_init(int ac, char *av[], t_table *table)
 
 	table->philo_n = ft_atol(av[1]);
 	table->time_d = ft_atol(av[2]);
-	table->time_s = ft_atol(av[3]);
-	table->time_e = ft_atol(av[4]);
+	table->time_e = ft_atol(av[3]);
+	table->time_s = ft_atol(av[4]);
 	table->end = 0;
 	table->time_start = 0;
 	if (ac == 6)

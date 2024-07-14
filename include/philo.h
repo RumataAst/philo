@@ -6,7 +6,7 @@
 /*   By: akretov <akretov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 16:44:42 by akretov           #+#    #+#             */
-/*   Updated: 2024/07/08 18:56:01 by akretov          ###   ########.fr       */
+/*   Updated: 2024/07/14 21:09:57 by akretov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ typedef struct s_philo_th
 {
 	struct s_table	*table;			//main struct
 	pthread_t		thread;			//thread
-	pthread_mutex_t	time_lock; 		//lock for time_next_meal
-	long long		time_next_meal;	//when to eat
+	pthread_mutex_t	time_lock;		//lock for time_next_meal
+	long			time_next_meal;	//when to eat
 	int				meals_eaten;	//how many meals
 	int				id;				//which philo
 }	t_phil;
@@ -34,13 +34,14 @@ typedef struct s_philo_th
 typedef struct s_table
 {
 	t_phil			**phil;		//create n structs
+	pthread_t		waiter;		//thread for checker
 	pthread_mutex_t	*fork_lock;//lock for forks [0,0,0,0,0,..,n]
-	pthread_mutex_t	main_lock; 	//lock for writing to terminal
-	pthread_mutex_t	end_lock; 	//lock to check if somebody died
-	long long		time_start;	//time when every thread is created
+	pthread_mutex_t	main_lock;	//lock for writing to terminal
+	pthread_mutex_t	end_lock;	//lock to check if somebody died
+	long			time_start;	//time when every thread is created
 	int				time_d;		//time to die
-	int				time_s;		//time to sleep
 	int				time_e;		//time to eat
+	int				time_s;		//time to sleep
 	int				end;		//flag for death
 	int				philo_n;	//how many philo
 	int				philo_diet;	//how many meals they need to eat
@@ -59,20 +60,28 @@ long long	ft_atol(const char *str);
 void		ft_struct_init(int ac, char *av[], t_table *table);
 
 //free.c
-int			fr_free_all(t_table *table,int ex_num);
+int			fr_free_all(t_table *table, int ex_num);
 
 //one_pthread.c
 void		ft_dead_alone(t_table *table);
 
 //checker_thread.c
-void		ft_checker(t_table *table);
+void		*checker(void *arg);
 
 //philo_thread.c
+int			check_end(t_table *table);
+void		*routine(void *arg);
 
-//thread.c
-void		ft_run_thread(t_table *table);
+//thread_0.c
+void		ft_run_thread(t_table *t);
 
-//TESTING.C FOR TESTING
-void	print_all(t_table *table);
+//thread_1.c
+void		ft_norm(t_table *t);
+
+//eating.c
+void		ft_eating(t_table *table, t_phil *phil_th, long time);
+
+//eating_1.c
+void		un_two(pthread_mutex_t *m1, pthread_mutex_t *m2);
 
 #endif

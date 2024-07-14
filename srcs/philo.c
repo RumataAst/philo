@@ -6,7 +6,7 @@
 /*   By: akretov <akretov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 18:48:30 by akretov           #+#    #+#             */
-/*   Updated: 2024/07/08 18:49:45 by akretov          ###   ########.fr       */
+/*   Updated: 2024/07/14 20:31:03 by akretov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	main(int ac, char *av[])
 	}
 	ft_struct_init(ac, av, table);
 	ft_run_thread(table);
-	print_all(table);
 	fr_free_all(table, 0);
 	return (0);
 }
